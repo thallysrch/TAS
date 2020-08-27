@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "grupo")
 public class GrupoEntity {
-    @Id //Chave primaria
+        @Id //Chave primaria
     @GeneratedValue
     private Integer id;
     
