@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-    public class ProdutoRepository extends JpaRepository<GrupoEntity, Integer> 
+    public interface ProdutoRepository extends JpaRepository<GrupoEntity, Integer> 
 {
     
 }
