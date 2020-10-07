@@ -1,12 +1,14 @@
-package br.edu.materdei.tas.estoque.repository;
+package br.edu.materdei.tas.estoque.service;
 
 import br.edu.materdei.tas.core.exception.ResourceNotFoundException;
-import br.edu.materdei.tas.core.service.IBaseService;
 import br.edu.materdei.tas.estoque.entity.EstoqueEntity;
 import br.edu.materdei.tas.estoque.repository.EstoqueRepository;
+import br.edu.materdei.tas.core.service.IBaseService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 public class EstoqueService implements IBaseService<EstoqueEntity> {
@@ -34,5 +36,5 @@ public class EstoqueService implements IBaseService<EstoqueEntity> {
     public void delete(Integer id) throws ResourceNotFoundException {
         repository.deleteById(id);
     }
-    
 }
+    
