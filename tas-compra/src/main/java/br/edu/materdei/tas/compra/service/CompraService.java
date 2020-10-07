@@ -1,4 +1,3 @@
-
 package br.edu.materdei.tas.compra.service;
 
 import br.edu.materdei.tas.compra.entity.CompraEntity;
@@ -12,18 +11,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CompraService implements IBaseService<CompraEntity>{
+
     @Autowired
     private CompraRepository repository;
+    
     @Override
     @Transactional
     public List<CompraEntity> findAll() {
-       return repository.findAll();
+        return repository.findAll();
     }
 
     @Override
     @Transactional
     public CompraEntity findById(Integer id) throws ResourceNotFoundException {
-       return repository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException(id));
     }
 
@@ -36,7 +37,7 @@ public class CompraService implements IBaseService<CompraEntity>{
     @Override
     @Transactional
     public void delete(Integer id) throws ResourceNotFoundException {
-         repository.deleteById(id);
+        repository.deleteById(id);
     }
     
 }
