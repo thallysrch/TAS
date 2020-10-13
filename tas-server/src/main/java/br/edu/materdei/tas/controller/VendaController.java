@@ -1,7 +1,7 @@
 package br.edu.materdei.tas.controller;
 
 import br.edu.materdei.tas.core.exception.ResourceNotFoundException;
-import br.edu.materdei.tas.utils.CustomErrorResponse;
+import br.edu.materdei.tas.server.utils.CustomErrorResponse;
 import br.edu.materdei.tas.venda.entity.VendaEntity;
 import br.edu.materdei.tas.venda.service.VendaService;
 import java.util.List;

@@ -2,7 +2,7 @@ package br.edu.materdei.tas.controller;
 
 import br.edu.materdei.tas.core.entity.GrupoEntity;
 import br.edu.materdei.tas.core.service.GrupoService;
-import br.edu.materdei.tas.utils.CustomErrorResponse;
+import br.edu.materdei.tas.server.utils.CustomErrorResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

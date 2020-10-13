@@ -3,7 +3,7 @@ package br.edu.materdei.tas.controller;
 import br.edu.materdei.tas.compra.entity.FornecedorEntity;
 import br.edu.materdei.tas.compra.service.FornecedorService;
 import br.edu.materdei.tas.core.exception.ResourceNotFoundException;
-import br.edu.materdei.tas.utils.CustomErrorResponse;
+import br.edu.materdei.tas.server.utils.CustomErrorResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
