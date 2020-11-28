@@ -1,0 +1,136 @@
+<div class="container">
+    <h1 class="d-flex">Cadastro de Abastecimentos</h1>
+    <button class="btn btn-primary" (click)="newEntity()"> Novo</button>
+
+    <p-table #dt [value]="abastecimentos" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Código</th>
+                <th>Nota Fiscal</th>
+                <th>Litros</th>
+                <th>Hodômetro</th>
+                <th>Valor Litros</th>
+                <th>Posto</th>
+                <th>Placa</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-abastecimento>
+            <tr>
+                <td>{{abastecimento.id}}</td>
+                <td>{{abastecimento.nota_fiscal}}</td>
+                <td>{{abastecimento.litros}}</td>
+                <td>{{abastecimento.odometro}}</td>
+                <td>{{abastecimento.valor_litros}}</td>
+                <td>{{abastecimento.nome_posto}}</td>
+                <td>{{abastecimento.placa}}</td>
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="edit(abastecimento)" [style]="{width: '90px'}">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(abastecimento)" [style]="{width: '90px'}">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast styleClass="top-align"></p-toast>
+    
+    <p-dialog header="Cadastro" [(visible)]="showDialog" modal="modal" [responsive]="true" [style]="{width: '350px'}">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+        <p-tabView>
+            <p-tabPanel header="Cadastro">
+                <div class="row">
+                    <div class="p-fluid">
+
+
+                        <div class="p-field">
+                            <label for="nota_fiscal">Nota</label>
+                            <p-inputNumber [step]="1" [min]="0" [max]="9999999" [showButtons]="true"
+                                formControlName="nota_fiscal"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.nota_fiscal.invalid && (form.controls.nota_fiscal.dirty || form.controls.nota_fiscal.touched)">
+                                <div *ngIf="form.controls.nota_fiscal.errors.required">
+                                    <small class="form-text text-danger">O campo Nota Fiscal é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="litros">Litros</label>
+                            <p-inputNumber type="number" formControlName="litros"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.litros.invalid && (form.controls.litros.dirty || form.controls.litros.touched)">
+                                <div *ngIf="form.controls.litros.errors.required">
+                                    <small class="form-text text-danger">O campo Litros é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="odometro">Hodômetro</label>
+                            <input pInputText class="form-control" type="number" name="odometro" id="odometro"
+                                formControlName="odometro">
+                            <div
+                                *ngIf="form.controls.odometro.invalid && (form.controls.odometro.dirty || form.controls.odometro.touched)">
+                                <div *ngIf="form.controls.odometro.errors.required">
+                                    <small class="form-text text-danger">O campo Hodômetro é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="valor_litros">Valor Litros</label>
+                            <input pInputText class="form-control" type="number" name="valor_litros" id="valor_litros"
+                                formControlName="valor_litros">
+                            <div
+                                *ngIf="form.controls.valor_litros.invalid && (form.controls.valor_litros.dirty || form.controls.valor_litros.touched)">
+                                <div *ngIf="form.controls.valor_litros.errors.required">
+                                    <small class="form-text text-danger">O campo Valor Litros é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="nome_posto">Posto</label>
+                            <input pInputText class="form-control" type="text" name="nome_posto" id="nome_posto" lenght=4
+                                formControlName="nome_posto">
+                            <div
+                                *ngIf="form.controls.nome_posto.invalid && (form.controls.nome_posto.dirty || form.controls.nome_posto.touched)">
+                                <div *ngIf="form.controls.nome_posto.errors.required">
+                                    <small class="form-text text-danger">O campo Posto é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="placa">Placa</label>
+                            <input pInputText class="form-control" type="text" name="placa" id="placa"
+                                formControlName="placa">
+                            <div
+                                *ngIf="form.controls.placa.invalid && (form.controls.placa.dirty || form.controls.placa.touched)">
+                                <div *ngIf="form.controls.placa.errors.required">
+                                    <small class="form-text text-danger">O campo Placa é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <p-footer>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+        </p-footer>
+      </form>
+    </p-dialog>
+</div>

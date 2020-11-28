@@ -6,6 +6,7 @@ import br.edu.materdei.tas.venda.entity.PedidoEntity;
 import br.edu.materdei.tas.venda.entity.VendaEntity;
 import br.edu.materdei.tas.venda.repository.PedidoRepository;
 import br.edu.materdei.tas.venda.repository.VendaRepository;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -52,7 +53,7 @@ public class VendaService implements IBaseService<VendaEntity>{
         
         //Marco o pedido como faturado
         PedidoEntity pedido = salvo.getPedido();
-        pedido.setDtfaturado(new Date());
+        pedido.setDtfaturado(LocalDate.now());
         
         pedidoRepository.save(pedido);
         
@@ -73,4 +74,5 @@ public class VendaService implements IBaseService<VendaEntity>{
         
         pedidoRepository.save(pedido);        
     }
+    
 }

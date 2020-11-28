@@ -1,0 +1,147 @@
+<div class="container">
+    <h1 class="d-flex">Cadastro de Solicitações</h1>
+    <button class="btn btn-primary" (click)="newEntity()"> Novo</button>
+
+    <p-table #dt [value]="solicitacaos" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Código solicitação</th>
+                <th>Destino Solicitação</th>
+                <th>Data Solicitação</th>
+                <th>Hora Solicitação</th>
+                <th>Codigo Cliente</th>
+                <th>Km Inicial</th>
+                <th>Km Final</th> 
+                <th>Ações</th>
+                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-solicitacao>
+            <tr>
+                <td>{{solicitacao.id}}</td>
+                <td>{{solicitacao.cod_solicitacao}}</td>
+                <td>{{solicitacao.data_solicitacao}}</td>
+                <td>{{solicitacao.destino_solicitacao}}</td>
+                <td>{{solicitacao.hora_solicitacao}}</td>
+                <td>{{solicitacao.cod_cliente}}</td>
+                <td>{{solicitacao.km_inicial}}</td>
+                <td>{{solicitacao.km_final}}</td>
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="edit(solicitacao)" [style]="{width: '90px'}">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(solicitacao)" [style]="{width: '90px'}">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast styleClass="top-align"></p-toast>
+    
+    <p-dialog header="Cadastro" [(visible)]="showDialog" modal="modal" [responsive]="true" [style]="{width: '350px'}">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+        <p-tabView>
+            <p-tabPanel header="Cadastro">
+                <div class="row">
+                    <div class="p-fluid">
+
+
+                        <div class="p-field">
+                            <label for="cod_solicitacao">Codigo</label>
+                            <p-inputNumber
+                                formControlName="cod_solicitacao"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.cod_solicitacao.invalid && (form.controls.cod_solicitacao.dirty || form.controls.cod_solicitacao.touched)">
+                                <div *ngIf="form.controls.cod_solicitacao.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="data_solicitacao">Data Solicitação</label>
+                            <p-calendar id="data_solicitacao" dateFormat="yy-mm-dd" dataType="string"
+                                formControlName="data_solicitacao"></p-calendar>
+                            <div
+                                *ngIf="form.controls.data_solicitacao.invalid && (form.controls.data_solicitacao.dirty || form.controls.data_solicitacao.touched)">
+                                <div *ngIf="form.controls.data_solicitacao.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="destino_solicitacao">Destino Solicitação</label>
+                            <input pInputText class="form-control" type="text" name="destino_solicitacao" id="destino_solicitacao"
+                                formControlName="destino_solicitacao">
+                            <div
+                                *ngIf="form.controls.destino_solicitacao.invalid && (form.controls.destino_solicitacao.dirty || form.controls.destino_solicitacao.touched)">
+                                <div *ngIf="form.controls.destino_solicitacao.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="hora_solicitacao">Hora Solicitação</label>
+                            <input pInputText class="form-control" name="hora_solicitacao" id="hora_solicitacao"
+                                formControlName="hora_solicitacao">
+                            <div
+                                *ngIf="form.controls.hora_solicitacao.invalid && (form.controls.hora_solicitacao.dirty || form.controls.hora_solicitacao.touched)">
+                                <div *ngIf="form.controls.hora_solicitacao.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-field">
+                            <label for="cod_cliente">Codigo Cliente</label>
+                            <p-inputNumber 
+                                formControlName="cod_cliente"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.cod_cliente.invalid && (form.controls.cod_cliente.dirty || form.controls.cod_cliente.touched)">
+                                <div *ngIf="form.controls.cod_cliente.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-field">
+                            <label for="km_inicial">KM Inicial</label>
+                            <p-inputNumber 
+                                formControlName="km_inicial"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.km_inicial.invalid && (form.controls.km_inicial.dirty || form.controls.km_inicial.touched)">
+                                <div *ngIf="form.controls.km_inicial.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-field">
+                            <label for="km_final">KM Final</label>
+                            <p-inputNumber 
+                                formControlName="km_final"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.km_final.invalid && (form.controls.km_final.dirty || form.controls.km_final.touched)">
+                                <div *ngIf="form.controls.km_final.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <p-footer>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+        </p-footer>
+      </form>
+    </p-dialog>
+</div>

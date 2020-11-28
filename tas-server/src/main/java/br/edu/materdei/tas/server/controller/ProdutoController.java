@@ -3,7 +3,7 @@ package br.edu.materdei.tas.server.controller;
 import br.edu.materdei.tas.core.entity.ProdutoEntity;
 import br.edu.materdei.tas.core.exception.ResourceNotFoundException;
 import br.edu.materdei.tas.core.service.ProdutoService;
-import br.edu.materdei.tas.server.utils.CustomErrorResponse;
+import br.edu.materdei.tas.utils.CustomErrorResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -100,7 +100,7 @@ public class ProdutoController {
             //Retorna o objeto que foi atualizado
             return new ResponseEntity(produto, HttpStatus.OK);
             
-        } catch (ResourceNotFoundException e) {
+        } catch (ResourceNotFoundException e) {;
             
             //Erro de produto não encontrado
             return new ResponseEntity(

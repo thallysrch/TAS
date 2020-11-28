@@ -1,0 +1,161 @@
+<div class="container">
+    <h1 class="d-flex">Cadastro de Multas</h1>
+    <button class="btn btn-primary" (click)="newEntity()"> Novo</button>
+
+    <p-table #dt [value]="multas" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Código</th>
+                <th>Infracao</th>
+                <th>Placa</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Hora</th> 
+                <th>Local</th> 
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-multa>
+            <tr>
+                <td>{{multa.id}}</td>
+                <td>{{multa.cod_multa}}</td>
+                <td>{{multa.nro_infracao}}</td>
+                <td>{{multa.placa}}</td>
+                <td>{{multa.valor}}</td>
+                <td>{{multa.data_multa}}</td>
+                <td>{{multa.hora_multa}}</td>
+                <td>{{multa.local_multa}}</td>
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="edit(multa)" [style]="{width: '90px'}">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(multa)" [style]="{width: '90px'}">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast styleClass="top-align"></p-toast>
+    
+    <p-dialog header="Cadastro" [(visible)]="showDialog" modal="modal" [responsive]="true" [style]="{width: '350px'}">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+        <p-tabView>
+            <p-tabPanel header="Cadastro">
+                <div class="row">
+                    <div class="p-fluid">
+
+
+                        <div class="p-field">
+                            <label for="cod_multa">Codigo</label>
+                            <p-inputNumber [step]="1" [min]="0" [max]="9999999" [showButtons]="true"
+                                formControlName="cod_multa"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.cod_multa.invalid && (form.controls.cod_multa.dirty || form.controls.cod_multa.touched)">
+                                <div *ngIf="form.controls.cod_multa.errors.required">
+                                    <small class="form-text text-danger">O campo Codigo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="nro_infracao">Infração</label>
+                            <p-inputNumber
+                                formControlName="nro_infracao"></p-inputNumber>
+                            <div    
+                                *ngIf="form.controls.nro_infracao.invalid && (form.controls.nro_infracao.dirty || form.controls.nro_infracao.touched)">
+                                <div *ngIf="form.controls.nro_infracao.errors.required">
+                                    <small class="form-text text-danger">O campo Infração é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="placa">Placa</label>
+                            <input pInputText class="form-control" name="placa" id="placa"
+                                formControlName="placa">
+                            <div
+                                *ngIf="form.controls.placa.invalid && (form.controls.placa.dirty || form.controls.placa.touched)">
+                                <div *ngIf="form.controls.placa.errors.required">
+                                    <small class="form-text text-danger">O campo Placa é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="id_motorista">Motorista</label>
+                            <p-inputNumber
+                                formControlName="id_motorista"></p-inputNumber>
+                            <div    
+                                *ngIf="form.controls.id_motorista.invalid && (form.controls.id_motorista.dirty || form.controls.id_motorista.touched)">
+                                <div *ngIf="form.controls.id_motorista.errors.required">
+                                    <small class="form-text text-danger">O campo Motorista é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="valor">Valor</label>
+                            <p-inputNumber [step]="1" [min]="0" [max]="9999999" [showButtons]="true"
+                                formControlName="valor"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.valor.invalid && (form.controls.valor.dirty || form.controls.valor.touched)">
+                                <div *ngIf="form.controls.valor.errors.required">
+                                    <small class="form-text text-danger">O campo Valor é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="data_multa">Data</label>
+                            <p-calendar id="data_multa" dateFormat="yy-mm-dd" data_multaType="string"
+                                formControlName="data_multa"></p-calendar>
+                            <div
+                                *ngIf="form.controls.data_multa.invalid && (form.controls.data_multa.dirty || form.controls.data_multa.touched)">
+                                <div *ngIf="form.controls.data_multa.errors.required">
+                                    <small class="form-text text-danger">O campo Data é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="p-field">
+                            <label for="hora_multa">Hora</label>
+                            <input pInputText class="form-control" type="text" name="hora_multa" id="hora_multa" lenght=11
+                                formControlName="hora_multa">
+                            <div
+                                *ngIf="form.controls.hora_multa.invalid && (form.controls.data_multa.dirty || form.controls.hora_multa.touched)">
+                                <div *ngIf="form.controls.hora_multa.errors.required">
+                                    <small class="form-text text-danger">O campo Hora é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="local_multa">Local</label>
+                            <input pInputText class="form-control" type="text" name="local_multa" id="local_multa" lenght=11
+                                formControlName="local_multa">
+                            <div
+                                *ngIf="form.controls.local_multa.invalid && (form.controls.local_multa.dirty || form.controls.local_multa.touched)">
+                                <div *ngIf="form.controls.local_multa.errors.required">
+                                    <small class="form-text text-danger">O campo Local é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <p-footer>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+        </p-footer>
+      </form>
+    </p-dialog>
+</div>

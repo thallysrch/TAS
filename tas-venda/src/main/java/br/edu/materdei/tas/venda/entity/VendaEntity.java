@@ -1,5 +1,6 @@
 package br.edu.materdei.tas.venda.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,15 +23,15 @@ public class VendaEntity {
     @Column(length = 6, nullable = false)
     private String codigo;
     
-    @Temporal(TemporalType.DATE)
-    private Date dtvenda;
+    @Column
+    private LocalDate dtvenda;
     
     @ManyToOne
     @JoinColumn(nullable = false)
     private PedidoEntity pedido;
 
     public VendaEntity() {
-        this.dtvenda = new Date();
+        this.dtvenda = LocalDate.now();
     }
 
     /**
@@ -64,14 +65,14 @@ public class VendaEntity {
     /**
      * @return the dtvenda
      */
-    public Date getDtvenda() {
+    public LocalDate getDtvenda() {
         return dtvenda;
     }
 
     /**
      * @param dtvenda the dtvenda to set
      */
-    public void setDtvenda(Date dtvenda) {
+    public void setDtvenda(LocalDate dtvenda) {
         this.dtvenda = dtvenda;
     }
 

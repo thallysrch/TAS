@@ -44,6 +44,12 @@
             <version>1.9.13</version>
         </dependency>
         
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tas-core</artifactId>
+            <version>1.0.2008.00</version>
+            <type>jar</type>
+        </dependency>
         
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -51,6 +57,17 @@
             <version>${project.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tas-frotas</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tas-venda</artifactId>
+            <version>1.0.2008.00</version>
+        </dependency>
     </dependencies>
     
      <build>

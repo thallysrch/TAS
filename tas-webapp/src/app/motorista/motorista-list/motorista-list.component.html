@@ -1,0 +1,107 @@
+<div class="container">
+    <h1 class="d-flex">Cadastro de Motoristas</h1>
+    <button class="btn btn-primary" (click)="newEntity()"> Novo</button>
+
+    <p-table #dt [value]="motoristas" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Cnh</th>
+                <th>Cpf</th>
+                <th>Admissao</th> 
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-motorista>
+            <tr>
+                <td>{{motorista.id}}</td>
+                <td>{{motorista.nome}}</td>
+                <td>{{motorista.cnh}}</td>
+                <td>{{motorista.cpf}}</td>
+                <td>{{motorista.dt_adimissao}}</td>             
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="edit(motorista)" [style]="{width: '90px'}">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(motorista)" [style]="{width: '90px'}">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast styleClass="top-align"></p-toast>
+    
+    <p-dialog header="Cadastro" [(visible)]="showDialog" modal="modal" [responsive]="true" [style]="{width: '350px'}">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+        <p-tabView>
+            <p-tabPanel header="Cadastro">
+                <div class="row">
+                    <div class="p-fluid">
+
+                        <div class="p-field">
+                            <label for="nome">Nome</label>
+                            <input pInputText class="form-control" name="nome" id="nome" formControlName="nome">
+                            <div    
+                                *ngIf="form.controls.nome.invalid && (form.controls.nome.dirty || form.controls.nome.touched)">
+                                <div *ngIf="form.controls.nome.errors.required">
+                                    <small class="form-text text-danger">O campo Nome é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="cnh">Cnh</label>
+                            <input pInputText class="form-control" name="cnh" id="cnh"
+                                formControlName="cnh">
+                            <div
+                                *ngIf="form.controls.cnh.invalid && (form.controls.cnh.dirty || form.controls.cnh.touched)">
+                                <div *ngIf="form.controls.cnh.errors.required">
+                                    <small class="form-text text-danger">O campo Cnh é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="dt_adimissao">Admissão</label>
+                            <p-calendar id="dt_adimissao" dateFormat="yy-mm-dd" data_multaType="string"
+                                formControlName="dt_adimissao"></p-calendar>
+                            <div
+                                *ngIf="form.controls.dt_adimissao.invalid && (form.controls.dt_adimissao.dirty || form.controls.dt_adimissao.touched)">
+                                <div *ngIf="form.controls.dt_adimissao.errors.required">
+                                    <small class="form-text text-danger">O campo Admissão é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="cpf">Cpf</label>
+                            <input pInputText class="form-control" type="text" name="cpf" id="cpf" lenght=11
+                                formControlName="cpf">
+                            <div
+                                *ngIf="form.controls.cpf.invalid && (form.controls.cpf.dirty || form.controls.cpf.touched)">
+                                <div *ngIf="form.controls.cpf.errors.required">
+                                    <small class="form-text text-danger">O campo Cpf é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <p-footer>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+        </p-footer>
+      </form>
+    </p-dialog>
+</div>

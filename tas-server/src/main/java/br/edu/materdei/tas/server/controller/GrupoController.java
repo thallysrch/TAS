@@ -3,7 +3,7 @@ package br.edu.materdei.tas.server.controller;
 import br.edu.materdei.tas.core.entity.GrupoEntity;
 import br.edu.materdei.tas.core.exception.ResourceNotFoundException;
 import br.edu.materdei.tas.core.service.GrupoService;
-import br.edu.materdei.tas.server.utils.CustomErrorResponse;
+import br.edu.materdei.tas.utils.CustomErrorResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -68,7 +68,7 @@ public class GrupoController {
             //Retorna o grupo com o ID do parametro
             return new ResponseEntity(grupo, HttpStatus.OK);
             
-        } catch (ResourceNotFoundException e) {
+        } catch (ResourceNotFoundException e) {;
             
             //Erro de grupo não encontrado
             return new ResponseEntity(
@@ -100,7 +100,7 @@ public class GrupoController {
             //Retorna o objeto que foi atualizado
             return new ResponseEntity(grupo, HttpStatus.OK);
             
-        } catch (ResourceNotFoundException e) {
+        } catch (ResourceNotFoundException e) {;
             
             //Erro de grupo não encontrado
             return new ResponseEntity(

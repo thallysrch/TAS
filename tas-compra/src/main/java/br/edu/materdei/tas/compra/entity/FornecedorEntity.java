@@ -9,10 +9,11 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "fornecedor")
 public class FornecedorEntity extends Pessoa{
+        
     @Column(length = 50)
     private String contato; 
     private String cnpj;
-
+    
     /**
      * @return the contato
      */

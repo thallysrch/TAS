@@ -1,0 +1,130 @@
+<div class="container">
+    <h1 class="d-flex">Cadastro de Clientes</h1>
+    <button class="btn btn-primary" (click)="newEntity()"> Novo</button>
+
+    <p-table #dt [value]="clientes" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Email</th>
+                <th>Cpf</th>
+                <th>Ativo</th> 
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cliente>
+            <tr>
+                <td>{{cliente.id}}</td>
+                <td>{{cliente.codigo}}</td>
+                <td>{{cliente.nome}}</td>
+                <td>{{cliente.endereco}}</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.cpf}}</td>
+                <td>{{cliente.ativo}}</td>
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="edit(cliente)" [style]="{width: '90px'}">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(cliente)" [style]="{width: '90px'}">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast styleClass="top-align"></p-toast>
+    
+    <p-dialog header="Cadastro" [(visible)]="showDialog" modal="modal" [responsive]="true" [style]="{width: '350px'}">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+        <p-tabView>
+            <p-tabPanel header="Cadastro">
+                <div class="row">
+                    <div class="p-fluid">
+
+
+                        <div class="p-field">
+                            <label for="codigo">Codigo</label>
+                            <p-inputNumber [step]="1" [min]="0" [max]="9999999" [showButtons]="true"
+                                formControlName="codigo"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.codigo.invalid && (form.controls.codigo.dirty || form.controls.codigo.touched)">
+                                <div *ngIf="form.controls.codigo.errors.required">
+                                    <small class="form-text text-danger">O campo Codigo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="nome">Nome</label>
+                            <input pInputText class="form-control" name="nome" id="nome" formControlName="nome">
+                            <div    
+                                *ngIf="form.controls.nome.invalid && (form.controls.nome.dirty || form.controls.nome.touched)">
+                                <div *ngIf="form.controls.nome.errors.required">
+                                    <small class="form-text text-danger">O campo Nome é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="endereco">Endereço</label>
+                            <input pInputText class="form-control" name="endereco" id="endereco"
+                                formControlName="endereco">
+                            <div
+                                *ngIf="form.controls.endereco.invalid && (form.controls.endereco.dirty || form.controls.endereco.touched)">
+                                <div *ngIf="form.controls.endereco.errors.required">
+                                    <small class="form-text text-danger">O campo Endereço é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="email">Email</label>
+                            <input pInputText class="form-control"  name="email" id="email"
+                                formControlName="email">
+                            <div
+                                *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)">
+                                <div *ngIf="form.controls.email.errors.required">
+                                    <small class="form-text text-danger">O campo Email é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="cpf">Cpf</label>
+                            <input pInputText class="form-control" type="text" name="cpf" id="cpf" lenght=11
+                                formControlName="cpf">
+                            <div
+                                *ngIf="form.controls.cpf.invalid && (form.controls.cpf.dirty || form.controls.cpf.touched)">
+                                <div *ngIf="form.controls.cpf.errors.required">
+                                    <small class="form-text text-danger">O campo Cpf é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <div class="p-field-checkbox">
+                                <p-checkbox binary="true" label="Ativo" formControlName="ativo"></p-checkbox>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <p-footer>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+        </p-footer>
+      </form>
+    </p-dialog>
+</div>

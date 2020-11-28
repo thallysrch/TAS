@@ -1,6 +1,6 @@
 package br.edu.materdei.tas.venda.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "pedido")
@@ -25,12 +23,11 @@ public class PedidoEntity {
     @Column(length = 6, nullable = false)
     private String codigo;
     
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date dtpedido;
+    private LocalDate dtpedido;
     
-    @Temporal(TemporalType.DATE)
-    private Date dtfaturado;
+    @Column
+    private LocalDate dtfaturado;
     
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -70,28 +67,28 @@ public class PedidoEntity {
     /**
      * @return the dtpedido
      */
-    public Date getDtpedido() {
+    public LocalDate getDtpedido() {
         return dtpedido;
     }
 
     /**
      * @param dtpedido the dtpedido to set
      */
-    public void setDtpedido(Date dtpedido) {
+    public void setDtpedido(LocalDate dtpedido) {
         this.dtpedido = dtpedido;
     }
 
     /**
      * @return the dtfaturado
      */
-    public Date getDtfaturado() {
+    public LocalDate getDtfaturado() {
         return dtfaturado;
     }
 
     /**
      * @param dtfaturado the dtfaturado to set
      */
-    public void setDtfaturado(Date dtfaturado) {
+    public void setDtfaturado(LocalDate dtfaturado) {
         this.dtfaturado = dtfaturado;
     }
 

@@ -1,16 +1,18 @@
 
 package br.edu.materdei.tas.core.entity;
 
+import br.edu.materdei.tas.core.converter.BooleanConverter;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Pessoa {
     @Id
-    @GeneratedValue
-    
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)    
     private Integer id;
     
     @Column(length = 6, nullable = false)
@@ -25,11 +27,12 @@ public class Pessoa {
     @Column(length = 250)
     private String email;
     
-    @Column(length =1, nullable = false)
-    private String ativo;
+    @Convert(converter = BooleanConverter.class)
+    @Column(columnDefinition = "char(1) default 'S'")
+    private Boolean ativo;
 
     public Pessoa() {
-        this.ativo = "S";
+        this.ativo = true;
     }
 
     /**
@@ -105,14 +108,14 @@ public class Pessoa {
     /**
      * @return the ativo
      */
-    public String getAtivo() {
+    public Boolean getAtivo() {
         return ativo;
     }
 
     /**
      * @param ativo the ativo to set
      */
-    public void setAtivo(String ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
     

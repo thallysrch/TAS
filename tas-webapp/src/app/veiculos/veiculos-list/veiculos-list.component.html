@@ -1,0 +1,135 @@
+<div class="container">
+    <h1 class="d-flex">Cadastro de Veículos</h1>
+    <button class="btn btn-primary" (click)="newEntity()"> Novo</button>
+
+    <p-table #dt [value]="veiculoss" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Código Veículos</th>
+                <th>Km Veículo</th>
+                <th>Placa</th>
+                <th>Chassi</th>
+                <th>Renavam</th>
+                <th>Marca</th> 
+                <th>Ações</th>
+                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-veiculos>
+            <tr>
+                <td>{{veiculos.id}}</td>
+                <td>{{veiculos.cod_veiculo}}</td>
+                <td>{{veiculos.km_veiculo}}</td>
+                <td>{{veiculos.placa}}</td>
+                <td>{{veiculos.chassi}}</td>
+                <td>{{veiculos.renavam}}</td>
+                <td>{{veiculos.marca}}</td>
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="edit(veiculos)" [style]="{width: '90px'}">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(veiculos)" [style]="{width: '90px'}">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast styleClass="top-align"></p-toast>
+    
+    <p-dialog header="Cadastro" [(visible)]="showDialog" modal="modal" [responsive]="true" [style]="{width: '350px'}">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+        <p-tabView>
+            <p-tabPanel header="Cadastro">
+                <div class="row">
+                    <div class="p-fluid">
+
+                        <div class="p-field">
+                            <label for="cod_veiculo">Codigo Veículos</label>
+                            <p-inputNumber
+                                formControlName="cod_veiculo"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.cod_veiculo.invalid && (form.controls.cod_veiculo.dirty || form.controls.cod_veiculo.touched)">
+                                <div *ngIf="form.controls.cod_veiculo.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="km_veiculo">Km Veículo</label>
+                            <p-inputNumber
+                                formControlName="km_veiculo"></p-inputNumber>
+                            <div
+                                *ngIf="form.controls.km_veiculo.invalid && (form.controls.km_veiculo.dirty || form.controls.km_veiculo.touched)">
+                                <div *ngIf="form.controls.km_veiculo.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="placa">Placa</label>
+                            <input pInputText class="form-control" name="placa" id="placa"
+                                formControlName="placa">
+                            <div
+                                *ngIf="form.controls.placa.invalid && (form.controls.placa.dirty || form.controls.placa.touched)">
+                                <div *ngIf="form.controls.placa.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="chassi">Chassi</label>
+                            <input pInputText class="form-control" name="chassi" id="chassi"
+                                formControlName="chassi">
+                            <div
+                                *ngIf="form.controls.chassi.invalid && (form.controls.chassi.dirty || form.controls.chassi.touched)">
+                                <div *ngIf="form.controls.chassi.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="renavam">renavam</label>
+                            <input pInputText class="form-control" name="renavam" id="renavam"
+                                formControlName="renavam">
+                            <div
+                                *ngIf="form.controls.renavam.invalid && (form.controls.renavam.dirty || form.controls.renavam.touched)">
+                                <div *ngIf="form.controls.renavam.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="marca">marca</label>
+                            <input pInputText class="form-control" name="marca" id="marca"
+                                formControlName="marca">
+                            <div
+                                *ngIf="form.controls.marca.invalid && (form.controls.marca.dirty || form.controls.marca.touched)">
+                                <div *ngIf="form.controls.marca.errors.required">
+                                    <small class="form-text text-danger">O campo é obrigatório.</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <p-footer>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+        </p-footer>
+      </form>
+    </p-dialog>
+</div>

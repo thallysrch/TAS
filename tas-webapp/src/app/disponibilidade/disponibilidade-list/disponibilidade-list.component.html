@@ -1,0 +1,67 @@
+<div class="container">
+    <h1 class="d-flex">Cadastro de Disponibilidade</h1>
+    <button class="btn btn-primary" (click)="newEntity()"> Novo</button>
+
+    <p-table #dt [value]="disponibilidades" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Código</th>
+                <th>Disponivel</th> 
+                <th>Observacao</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-disponibilidade>
+            <tr>
+                <td>{{disponibilidade.id}}</td>
+                <td>{{disponibilidade.disponivel}}</td>
+                <td>{{disponibilidade.obs}}</td>
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="edit(disponibilidade)" [style]="{width: '90px'}">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(disponibilidade)" [style]="{width: '90px'}">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast styleClass="top-align"></p-toast>
+    
+    <p-dialog header="Cadastro" [(visible)]="showDialog" modal="modal" [responsive]="true" [style]="{width: '350px'}">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+        <p-tabView>
+            <p-tabPanel header="Cadastro">
+                <div class="row">
+                    <div class="p-fluid">
+
+
+                        <div class="p-field">
+                            <div class="p-field-checkbox">
+                                <p-checkbox binary="true" label="Disponível" formControlName="disponivel"></p-checkbox>
+                            </div>
+                        </div>
+
+                        <div class="p-field">
+                            <label for="obs">Observação</label>
+                            <input pInputText class="form-control" name="obs" id="obs"
+                                formControlName="obs">
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+        <p-footer>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+        </p-footer>
+      </form>
+    </p-dialog>
+</div>

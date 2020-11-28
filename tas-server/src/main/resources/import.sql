@@ -1,0 +1,2 @@
+insert into abastecimento (nota_fiscal, litros, odometro, valor_litros, nome_posto, placa) values (123, 456, 789, 44, 'Loko', 'AAA1234');
+insert into abastecimento (nota_fiscal, litros, odometro, valor_litros, nome_posto, placa) values (321, 347, 312, 10, 'Loko', 'AAA1234');

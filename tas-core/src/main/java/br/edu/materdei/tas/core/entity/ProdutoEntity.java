@@ -1,10 +1,12 @@
-
 package br.edu.materdei.tas.core.entity;
 
+import br.edu.materdei.tas.core.converter.BooleanConverter;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -15,35 +17,35 @@ import javax.persistence.Table;
 @Table(name = "produto")
 public class ProdutoEntity {
     @Id
-    @GeneratedValue
-     private Integer id;
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer id;
     
     @Column(length = 6, nullable = false)
-    
     private String codigo;
-    
+
     @Column(length = 50, nullable = false)
     private String nome;
     
     @Lob
-    @Column (length = 5000)
+    @Column(length = 5000)
     private String descricao;
     
-    @Column (nullable = false)
+    @Column(nullable = false)
     private Double preco;
     
-    @Column(length = 1, nullable = false)
-    private String ativo;
+    @Convert(converter = BooleanConverter.class)
+    @Column(columnDefinition = "char(1) default 'S'")
+    private Boolean ativo;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     private GrupoEntity grupo;
-    
-    public ProdutoEntity(){
-        this.ativo = "S";
+
+    public ProdutoEntity() {
+        this.ativo = true;
     }
     
-                              
+
     /**
      * @return the id
      */
@@ -103,14 +105,14 @@ public class ProdutoEntity {
     /**
      * @return the ativo
      */
-    public String getAtivo() {
+    public Boolean getAtivo() {
         return ativo;
     }
 
     /**
      * @param ativo the ativo to set
      */
-    public void setAtivo(String ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 
@@ -141,6 +143,4 @@ public class ProdutoEntity {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
-    
 }

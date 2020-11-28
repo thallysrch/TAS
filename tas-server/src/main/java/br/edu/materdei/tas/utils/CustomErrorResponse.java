@@ -1,5 +1,4 @@
-
-package br.edu.materdei.tas.server.utils;
+package br.edu.materdei.tas.utils;
 
 
 public class CustomErrorResponse {
